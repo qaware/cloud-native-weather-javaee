@@ -1,8 +1,8 @@
-# Weather Service with JavaEE
+# Cloud-native Weather Service with JavaEE
 
 This example implements a simple weather REST service using Payara Micro, JavaEE and Microprofile APIs.
 
-- https://start.microprofile.io
+![Weather Service Architecture](architecture.png)
 
 ## Build and run with JDK11
 
