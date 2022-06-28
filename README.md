@@ -4,7 +4,7 @@ This example implements a simple weather REST service using Payara Micro, JavaEE
 
 ![Weather Service Architecture](architecture.png)
 
-## Build and run with JDK11
+## Build and run locally
 
 ```bash
 $ mvn package
@@ -15,16 +15,16 @@ $ skaffold dev --no-prune=false --cache-artifacts=false
 ## Exercise the application
 
 ```bash
-$ curl -X GET http://localhost:8080/api/weather\?city\=Rosenheim
+$ curl -X GET http://localhost:18080/api/weather\?city\=Rosenheim
 {"city":"Rosenheim","weather":"Sunshine"}
 
-$ curl -X GET http://localhost:8080/
+$ curl -X GET http://localhost:18080/
 
-$ curl -X GET http://localhost:8080/metrics
+$ curl -X GET http://localhost:18080/metrics
 
-$ curl -X GET http://localhost:8080/health
-$ curl -X GET http://localhost:8080/health/ready
-$ curl -X GET http://localhost:8080/health/live
+$ curl -X GET http://localhost:18080/health
+$ curl -X GET http://localhost:18080/health/ready
+$ curl -X GET http://localhost:18080/health/live
 ```
 
 ## Maintainer
