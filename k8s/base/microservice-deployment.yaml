@@ -20,10 +20,23 @@ spec:
         resources:
           requests:
             memory: "256Mi"
-            cpu: "1"
+            cpu: "0.5"
           limits:
             memory: "512Mi"
-            cpu: "1"
+            cpu: "2"
+        livenessProbe:
+          timeoutSeconds: 1
+          initialDelaySeconds: 60
+          periodSeconds: 30
+          httpGet:
+            port: http
+            path: "/health/live"
+        readinessProbe:
+          timeoutSeconds: 1
+          initialDelaySeconds: 30
+          httpGet:
+            port: http
+            path: "/health/ready"
         ports:
           - name: http
             containerPort: 8080
