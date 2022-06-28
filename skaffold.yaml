@@ -7,7 +7,7 @@ build:
   tagPolicy:
     gitCommit: {}
   artifacts:
-    - image: weather-service
+    - image: cloud-native-weather-javaee
       docker:
         dockerfile: Dockerfile
   local:

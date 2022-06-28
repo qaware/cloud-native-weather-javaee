@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: weather-service
-        image: weather-service
+        image: cloud-native-weather-javaee
         resources:
           requests:
             memory: "256Mi"
