@@ -33,9 +33,9 @@ public class OpenWeatherMapConnector {
         }
     }
 
-    @Timeout(value = 5L, unit = ChronoUnit.SECONDS)
-    @Retry(delay = 500L, maxRetries = 1)
-    @Fallback(fallbackMethod = "defaultWeather")
+    // @Timeout(value = 5L, unit = ChronoUnit.SECONDS)
+    // @Retry(delay = 500L, maxRetries = 1)
+    // @Fallback(fallbackMethod = "defaultWeather")
     public String getWeather(String city) {
         JsonObject response = openWeatherMap.getWeather(city, configuration.getWeatherAppId());
         JsonPointer pointer = Json.createPointer("/weather/0/main");
