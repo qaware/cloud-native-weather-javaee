@@ -8,6 +8,11 @@ resources:
   # you can also specify a Git repo URL here
   - ../../base/
   
+images:
+  - name: cloud-native-weather-javaee
+    newName: ghcr.io/qaware/cloud-native-weather-javaee
+    newTag: 1.0.0
+
 patchesStrategicMerge:
   - 2-replicas.yaml
 
