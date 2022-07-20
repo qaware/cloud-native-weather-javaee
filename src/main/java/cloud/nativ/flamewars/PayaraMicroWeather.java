@@ -41,7 +41,7 @@ public class PayaraMicroWeather {
     }
 
     public PayaraMicroWeather touch(int offset) {
-        this.nextUpdate = LocalDateTime.now().plusMinutes(offset);
+        this.nextUpdate = LocalDateTime.now().plusHours(offset);
         return this;
     }
 
