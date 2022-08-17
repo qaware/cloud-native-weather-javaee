@@ -5,7 +5,7 @@ RUN ["/busybox/busybox", "--install", "/bin"]
 
 WORKDIR /payara
 
-COPY --from=payara/micro:5.2022.1 /opt/payara/payara-micro.jar ./
+COPY --from=payara/micro:5.2022.3 /opt/payara/payara-micro.jar ./
 
 # https://blog.payara.fish/warming-up-payara-micro-container-images-in-5.201
 RUN java -jar payara-micro.jar --rootdir micro-root --outputlauncher && \
