@@ -9,6 +9,7 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.json.Json;
+import javax.json.JsonNumber;
 import javax.json.JsonObject;
 import javax.json.JsonPointer;
 import javax.json.JsonString;
@@ -18,6 +19,9 @@ import java.time.temporal.ChronoUnit;
 
 @ApplicationScoped
 public class OpenWeatherMapConnector {
+
+    private static final double KELVIN_2_CELSIUS = 273.15;
+
     @Inject
     private OpenWeatherMapConfiguration configuration;
     private OpenWeatherMap openWeatherMap;
@@ -36,13 +40,20 @@ public class OpenWeatherMapConnector {
     @Timeout(value = 5L, unit = ChronoUnit.SECONDS)
     @Retry(delay = 500L, maxRetries = 1)
     @Fallback(fallbackMethod = "defaultWeather")
-    public String getWeather(String city) {
+    public PayaraMicroWeather getWeather(String city) {
         JsonObject response = openWeatherMap.getWeather(city, configuration.getWeatherAppId());
-        JsonPointer pointer = Json.createPointer("/weather/0/main");
-        return ((JsonString) pointer.getValue(response)).getString();
+        
+        JsonPointer pointer;
+        pointer = Json.createPointer("/weather/0/main");
+        String weather = ((JsonString) pointer.getValue(response)).getString();
+
+        pointer = Json.createPointer("/main/temp");
+        double temperature = ((JsonNumber) pointer.getValue(response)).doubleValue() - KELVIN_2_CELSIUS;
+
+        return new PayaraMicroWeather(city, weather, temperature);
     }
 
-    public String defaultWeather(String city) {
-        return "Unknown";
+    public PayaraMicroWeather defaultWeather(String city) {
+        return new PayaraMicroWeather(city, "Unknown", 0.0);
     }
 }

@@ -12,9 +12,10 @@ public class PayaraMicroWeather {
     PayaraMicroWeather() {
     }
 
-    public PayaraMicroWeather(final String city, final String weather) {
+    public PayaraMicroWeather(final String city, final String weather, final double temperature) {
         this.city = city;
         this.weather = weather;
+        this.temperature = temperature;
     }
 
     @Id
@@ -23,6 +24,9 @@ public class PayaraMicroWeather {
 
     @Column(name = "weather", nullable = false)
     private String weather;
+
+    @Column(name = "temperature", nullable = false)
+    private double temperature;
 
     @Column(name = "next_update", columnDefinition = "TIMESTAMP")
     @JsonbTransient
@@ -34,6 +38,14 @@ public class PayaraMicroWeather {
 
     public String getWeather() {
         return weather;
+    }
+   
+    public double getTemperature() {
+        return temperature;
+    }
+
+    public void setTemperature(double temperature) {
+        this.temperature = temperature;
     }
 
     public LocalDateTime getNextUpdate() {

@@ -22,8 +22,7 @@ public class PayaraMicroWeatherService {
     public PayaraMicroWeather getWeatherForCity(String city) {
         Optional<PayaraMicroWeather> currentWeather = repository.findCurrentWeatherByCity(city);
         return currentWeather.orElseGet(() -> {
-            String weather = connector.getWeather(city);
-            PayaraMicroWeather current = new PayaraMicroWeather(city, weather);
+            PayaraMicroWeather current = connector.getWeather(city);
             return repository.save(current.touch(nextUpdateOffset));
         });
     }
