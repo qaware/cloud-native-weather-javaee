@@ -70,9 +70,11 @@ the final runtime artifact is build during the image build stage and then used a
 stage (very similar to Cloud-native Build Packs approach).
 
 **Lab Instructions**
-1. Create a `Dockerfile` and add the following two stages
-    - Build the JavaEE WAR artefact using the correct `openjdk:11` base
+1. Create a `Dockerfile` and add the following stage
     - Assemble the final runtime image using `gcr.io/distroless/java:11` as base
+2. (_optional_) Implement a Docker multi-stage build
+    - Build the JavaEE WAR artefact using the correct `openjdk:11` base
+    - Assemble the final runtime image using the WAR artefact from the previous stage
 
 <details>
   <summary markdown="span">Click to expand solution ...</summary>

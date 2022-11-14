@@ -1,16 +1,3 @@
-FROM openjdk:11 as builder
-
-WORKDIR /javaee
-
-COPY .mvn ./.mvn/
-COPY mvnw ./
-COPY pom.xml ./
-
-RUN ./mvnw dependency:resolve dependency:resolve-plugins
-
-COPY src src/
-RUN ./mvnw package -DskipTests
-
 FROM gcr.io/distroless/java:11
 
 COPY --from=amd64/busybox:1.31.1 /bin/busybox /busybox/busybox
@@ -32,4 +19,4 @@ EXPOSE 8080
 ENTRYPOINT ["java", "-server", "-Xshare:on", "-XX:SharedArchiveFile=payara.jsa", "-XX:+UseContainerSupport", "-XX:MaxRAMPercentage=75.0", "-XX:ThreadStackSize=256", "-XX:MaxMetaspaceSize=128m", "-XX:+UseG1GC", "-XX:MaxGCPauseMillis=250", "-XX:+UseStringDeduplication", "-Djava.security.egd=file:/dev/./urandom", "-jar", "micro-root/launch-micro.jar"]
 CMD ["--nocluster", "--disablephonehome", "--deploy", "weather-service-javaee.war:/"]
 
-COPY --from=builder /javaee/target/weather-service-javaee.war ./
+COPY target/weather-service-javaee.war ./
